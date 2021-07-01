@@ -38,7 +38,10 @@ if len(update_or_install) > 0:
     print(
         "You are missing some packages, or some require updating. If you use "
         "pip, run this command to update your environment:\n\n\t"
-        f"pip install --upgrade {' '.join(update_or_install)}\n")
+        f"pip install --upgrade {' '.join(update_or_install)}\n\b"
+        "\nOr, if you use conda, run this command:\n\n\t"
+        f"conda update {' '.join(update_or_install)}\n\b"
+    )
 
 else:
     print("Everything looks good -- you're all set up!")
