@@ -1,0 +1,34 @@
+get_ipython().magic('config InlineBackend.figure_format = "retina"')  # noqa
+
+import matplotlib.pyplot as plt
+
+plt.style.use("default")
+
+plot_rcparams = {
+    'image.cmap': 'magma',
+
+    # Fonts:
+    'font.size': 20,
+    'figure.titlesize': 'xx-large',
+    'axes.titlesize': 'x-large',
+    'axes.labelsize': 'x-large',
+    'xtick.labelsize': 'large',
+    'ytick.labelsize': 'large',
+
+    # Axes:
+    'axes.labelcolor': 'k',
+    'axes.axisbelow': True,
+
+    # Ticks
+    'xtick.color': '#333333',
+    'xtick.direction': 'in',
+    'ytick.color': '#333333',
+    'ytick.direction': 'in',
+    'xtick.top': True,
+    'ytick.right': True,
+
+    'figure.dpi': 250,
+    'savefig.dpi': 250,
+}
+
+plt.rcParams.update(plot_rcparams)
