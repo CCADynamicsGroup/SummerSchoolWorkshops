@@ -2,3 +2,7 @@
 .*
 # un-ignoring gitignore
 !/.gitignore
+
+2-generating-self-consistent-galaxies-SOLUTIONS.ipynb
+1-phase-mixing-SOLUTIONS.ipynb
+3-streams-extra.ipynb
