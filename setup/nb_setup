@@ -8,12 +8,12 @@ plot_rcparams = {
     'image.cmap': 'magma',
 
     # Fonts:
-    'font.size': 20,
-    'figure.titlesize': 'xx-large',
-    'axes.titlesize': 'x-large',
-    'axes.labelsize': 'x-large',
-    'xtick.labelsize': 'large',
-    'ytick.labelsize': 'large',
+    'font.size': 14,
+    'figure.titlesize': 'x-large',
+    'axes.titlesize': 'large',
+    'axes.labelsize': 'large',
+    'xtick.labelsize': 'medium',
+    'ytick.labelsize': 'medium',
 
     # Axes:
     'axes.labelcolor': 'k',
@@ -26,9 +26,69 @@ plot_rcparams = {
     'ytick.direction': 'in',
     'xtick.top': True,
     'ytick.right': True,
+    
+    'mathtext.fontset': 'cm',
 
-    'figure.dpi': 250,
-    'savefig.dpi': 250,
+#    'figure.dpi': 200,
+#    'savefig.dpi': 200,
 }
 
 plt.rcParams.update(plot_rcparams)
+
+
+# Custom functions:
+def animate_3d(orbit, azims, elevs, lim=(-20, 20), total_time=4,
+               plot_kw=None, subplots_kw=None, **animation_kw):
+    from matplotlib.animation import FuncAnimation
+    import numpy as np
+    
+    azims = np.array(azims)
+    elevs = np.array(elevs)
+    if len(azims) != len(elevs):
+        raise ValueError("Invalid input: len(azims) must equal len(elevs)")
+    
+    if subplots_kw is None:
+        subplots_kw = dict()
+    subplots_kw.setdefault('figsize', (6, 5))
+    
+    if plot_kw is None:
+        plot_kw = dict()
+    plot_kw.setdefault('marker', 'o')
+    plot_kw.setdefault('linestyle', plot_kw.pop('ls', 'none'))
+    plot_kw.setdefault('markersize', plot_kw.pop('ms', 1.))
+    plot_kw.setdefault('markeredgewidth', plot_kw.pop('mew', 0.))
+    plot_kw.setdefault('alpha', 0.5)
+    
+    fig, ax = plt.subplots(1, 1, 
+                           subplot_kw=dict(projection='3d'),
+                           constrained_layout=True,
+                           **subplots_kw)
+    
+    l, = ax.plot(orbit.x.to_value('kpc'),
+                 orbit.y.to_value('kpc'),
+                 orbit.z.to_value('kpc'),
+                 **plot_kw)
+    
+    ax.set_xlabel('$x$ [kpc]')
+    ax.set_ylabel('$y$ [kpc]')
+    ax.set_zlabel('$z$ [kpc]')
+    
+    ax.set(xlim=lim, ylim=lim, zlim=lim)
+    
+    def func(i):
+        ax.azim = azims[i]
+        ax.elev = elevs[i]
+        return l, 
+    
+    ax.dist = 12
+    
+    if animation_kw is None:
+        animation_kw = dict()
+    animation_kw.setdefault('blit', True)
+    
+    nframes = len(azims)
+    fps = nframes / total_time
+    animation_kw.setdefault('interval', int(1000 / fps))
+    anim = FuncAnimation(fig, func, frames=nframes, **animation_kw)
+    
+    return fig, anim
