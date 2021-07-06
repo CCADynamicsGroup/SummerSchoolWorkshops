@@ -1,10 +1,11 @@
 # Workshop 2: Galaxies and collections of orbits
 
 ---
-This repository contains three notebooks:
+This repository contains four notebooks:
 * [1-phase-mixing.ipynb](./1-phase-mixing.ipynb)
 * [2-generating-self-consistent-galaxies.ipynb](./2-generating-self-consistent-galaxies.ipynb)
 * [3-streams.ipynb](./3-streams.ipynb)
+* [3D-visualizations](./3D-visualizations.ipynb)
 
 ---
 
@@ -14,6 +15,8 @@ on notebook 1 and 1 hour each on notebooks 2 and 3. It is absolutely fine to
 skip most of the optional material. The best approach is to quickly move through
 the notebooks and to go back to the parts that you find the most interesting to
 explore those in more detail.
+
+The `3D-visualizations` notebook just contains some examples of bonus material on creating 3D visualizations of orbits and 3D animations of streams.
 
 ---
 
