@@ -1,0 +1,12 @@
+astroquery>=0.4
+astropy>=4.2
+gala>=1.4
+galpy>=1.5
+IPython>=7.16
+jupyter_client>=6.0
+matplotlib>=3.2
+nbformat>=5.1
+numpy>=1.19
+pyia>=1.3
+scipy>=1.5
+sympy>=1.5
